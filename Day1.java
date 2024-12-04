@@ -2,7 +2,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
-
+import java.util.*;
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Day1 {
@@ -23,35 +23,17 @@ public class Day1 {
             firstNumbers.add(num1);
             secondNumbers.add(num2);
         }
+        Collections.sort(firstNumbers);
+        Collections.sort(secondNumbers);
+
+
+        System.out.println(firstNumbers);
+        System.out.println(secondNumbers);
 
         for(int i = 0; i<firstNumbers.size(); i++) {
-            int min = firstNumbers.get(0);
-            for(int num : firstNumbers) {
-                if(min>num) {
-                    min = firstNumbers.get(firstNumbers.indexOf(num));
-                }
-            }
-            orderedFirstNumbers.add(firstNumbers.get(firstNumbers.indexOf(min)));
-            firstNumbers.remove(firstNumbers.indexOf(min));
-        }
-
-        System.out.println(orderedFirstNumbers);
-
-        for(int i = 0; i<secondNumbers.size(); i++) {
-            int min = secondNumbers.get(0);
-            for(int num : secondNumbers) {
-                if(min>num) {
-                    min = secondNumbers.get(secondNumbers.indexOf(num));
-                }
-            }
-            orderedSecondNumbers.add(secondNumbers.get(secondNumbers.indexOf(min)));
-            secondNumbers.remove(secondNumbers.indexOf(min));
-        }
-
-        for(int i = 0; i<orderedSecondNumbers.size(); i++) {
-            int num1 = orderedSecondNumbers.get(i);
-            int num2 = orderedFirstNumbers.get(i);
-            int combine = Math.abs(num2-num1);
+            int num1 = firstNumbers.get(i);
+            int num2 = secondNumbers.get(i);
+            int combine = Math.abs(num1-num2);
             total+=combine;
         }
 
