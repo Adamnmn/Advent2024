@@ -15,8 +15,8 @@ public class Day1 {
         ArrayList<Integer> orderedSecondNumbers = new ArrayList<Integer>();
         int total = 0;
         for(String word : data) {
-             String[] tempList = word.split(" {3}");
-             String first = tempList[0];
+            String[] tempList = word.split(" {3}");
+            String first = tempList[0];
             String second = tempList[1];
             int num1 = Integer.parseInt(first);
             int num2 = Integer.parseInt(second);
@@ -27,7 +27,7 @@ public class Day1 {
         for(int i = 0; i<firstNumbers.size(); i++) {
             int min = firstNumbers.get(0);
             for(int num : firstNumbers) {
-                 if(min>num) {
+                if(min>num) {
                     min = firstNumbers.get(firstNumbers.indexOf(num));
                 }
             }
@@ -35,7 +35,27 @@ public class Day1 {
             firstNumbers.remove(firstNumbers.indexOf(min));
         }
 
+        System.out.println(orderedFirstNumbers);
 
+        for(int i = 0; i<secondNumbers.size(); i++) {
+            int min = secondNumbers.get(0);
+            for(int num : secondNumbers) {
+                if(min>num) {
+                    min = secondNumbers.get(secondNumbers.indexOf(num));
+                }
+            }
+            orderedSecondNumbers.add(secondNumbers.get(secondNumbers.indexOf(min)));
+            secondNumbers.remove(secondNumbers.indexOf(min));
+        }
+
+        for(int i = 0; i<orderedSecondNumbers.size(); i++) {
+            int num1 = orderedSecondNumbers.get(i);
+            int num2 = orderedFirstNumbers.get(i);
+            int combine = Math.abs(num2-num1);
+            total+=combine;
+        }
+
+        System.out.println(total);
 
     }
 
@@ -71,4 +91,3 @@ public class Day1 {
         }
     }
 }
-
