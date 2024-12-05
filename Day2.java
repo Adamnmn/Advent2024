@@ -5,30 +5,44 @@ import java.util.Scanner;
 
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
-public class Day1Part2 {
+public class Day2 {
     public static void main(String[] args) {
-        ArrayList<String> lists = getFileData("src/text");
-        ArrayList<Integer> numList = new ArrayList<Integer>();
         int total = 0;
-        for(int i = 0; i<lists.size(); i++) {
-            int num = Integer.parseInt(lists.get(i));
-            numList.add(num);
+        ArrayList<String> lists = getFileData("src/text");
+        ArrayList<ArrayList> numList = new ArrayList<ArrayList>();
+        for(String word : lists) {
+            String[] tempList = word.split(" ");
+            ArrayList<Integer> miniNumList = new ArrayList<Integer>();
+            for(int i = 0; i<tempList.length; i++) {
+                int num = Integer.parseInt(tempList[i]);
+                miniNumList.add(num);
+            }
+            numList.add(miniNumList);
+
+        }
+        
+        1. just do a nested looop with inner one looping mini num list and bigger one looping numlist
+
+        if (!(Math.abs(start - next) > 3 || Math.abs(start - next) < 1)) {
+            numList.remove(k);
         }
 
-        for(int j = 0; j<numList.size(); j++) {
-            int start = numList.get(j);
-            int next = numList.get(j+1);
-            if(!(Math.abs(start-next) > 3 || Math.abs(start-next) < 1 )) {
-            
-              PUT MORE CODE HERE\\\\\
-                
-                
-            }
-        }
+
 
 
     }
 
+    public static boolean findNext(ArrayList<Integer> list, int position) {
+        int start = list.get(position);
+        int next = list.get(position + 1);
+        if (start > next) {
+          return false;
+        }
+        else {
+           return true;
+        }
+
+    }
 
     public static int getAnswer(ArrayList<String> fileData) {
         for (int i = 0; i < fileData.size(); i++) {
