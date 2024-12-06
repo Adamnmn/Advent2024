@@ -20,14 +20,45 @@ public class Day2 {
             numList.add(miniNumList);
 
         }
-        
-        1. just do a nested looop with inner one looping mini num list and bigger one looping numlist
 
-        if (!(Math.abs(start - next) > 3 || Math.abs(start - next) < 1)) {
-            numList.remove(k);
+
+        for(int k = 0; k<numList.size(); k++) {
+            ArrayList<Integer> miniNumList = numList.get(k);
+            String stat;
+            String stat2;
+            boolean stat3 = true;
+            int num1= miniNumList.get(0);
+            int num2 = miniNumList.get(1);
+            if(num1>num2) {
+               stat = "decrease";
+            }
+            else {
+                stat = "increase";
+            }
+            for(int p = 0; p < miniNumList.size()-1; p++) {
+                int start = miniNumList.get(p);
+                int next = miniNumList.get(p+1);
+                if(miniNumList.get(p) < miniNumList.get(p+1)) {
+                    stat2="increase";
+                }
+                else {
+                    stat2="decrease";
+                }
+                if(!(stat2.equals(stat))) {
+                    stat3=false;
+                }
+                if((Math.abs(start - next) > 3 || Math.abs(start - next) < 1)) {
+                    stat3=false;
+                }
+
+            }
+            if(stat3) {
+                total++;
+            }
+
         }
 
-
+System.out.println(total);
 
 
     }
