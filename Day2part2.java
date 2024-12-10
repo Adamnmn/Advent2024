@@ -27,11 +27,11 @@ public class Day2 {
             String stat;
             String stat2;
             boolean stat3 = true;
-            int count = 0;
             int num1= miniNumList.get(0);
             int num2 = miniNumList.get(1);
+            int problemIndex = 0;
             if(num1>num2) {
-               stat = "decrease";
+                stat = "decrease";
             }
             else {
                 stat = "increase";
@@ -45,24 +45,40 @@ public class Day2 {
                 else {
                     stat2="decrease";
                 }
-                if(!(stat2.equals(stat))) {
+
+                if(!(stat2.equals(stat)) || (Math.abs(start - next) > 3 || Math.abs(start - next) < 1)) {
                     stat3=false;
-                    count++;
-                }
-                if((Math.abs(start - next) > 3 || Math.abs(start - next) < 1)) {
-                    stat3=false;
-                    count++;
+                    problemIndex=p;
                 }
 
             }
-            if(stat3 || count <= 1 ) {
+            if(stat3) {
                 total++;
             }
+            else {
+                miniNumList.remove(problemIndex);
+                for (int h = 0; h < miniNumList.size() - 1; h++) {
+                    int start = miniNumList.get(h);
+                    int next = miniNumList.get(h + 1);
+                    if (miniNumList.get(h) < miniNumList.get(h + 1)) {
+                        stat2 = "increase";
+                    } else {
+                        stat2 = "decrease";
+                    }
+                    if (!(stat2.equals(stat)) || (Math.abs(start - next) > 3 || Math.abs(start - next) < 1)) {
+                        stat3 = false;
+                    }
 
+                }
+                if (stat3) {
+                    total++;
+                }
+
+            }
 
         }
 
-System.out.println(total);
+        System.out.println(total);
 
 
     }
@@ -71,10 +87,10 @@ System.out.println(total);
         int start = list.get(position);
         int next = list.get(position + 1);
         if (start > next) {
-          return false;
+            return false;
         }
         else {
-           return true;
+            return true;
         }
 
     }
