@@ -26,24 +26,20 @@ public class Day2 {
             if(check(miniNumList)) {
                 total++;
             }
-            else{
-                int boundIndex=boundProblem(miniNumList);
-                int increaseIndex=increaseProblem(miniNumList);
-                int decreaseIndex=decreaseProblem(miniNumList);
-                if(!(increaseIndex==0)) {
-                    miniNumList.remove(increaseIndex);
+            else {
+
+                int current = miniNumList.get(i);
+                int next = miniNumList.get(i+1);
+                if(current-next > 0) {
+                    miniNumList.remove(increaseProblem(miniNumList));
+
                 }
-                else if(!(decreaseIndex == 0)) {
-                    miniNumList.remove(decreaseIndex);
+                else {
+                    miniNumList.remove(decreaseProblem(miniNumList));
                 }
-                else if(!(boundIndex==0)) {
-                    miniNumList.remove(boundIndex);
-                }
-                for(int k = 0; k<miniNumList.size()-1; k++) {
-                    if(check(miniNumList)) {
-                        total++;
-                    }
-                }
+            if(check(miniNumList)) {
+                total++;
+            }
             }
         }
 
@@ -80,11 +76,11 @@ public static int boundProblem(ArrayList<Integer> list) {
     return 0;
 }
 
-    public static int increaseProblem(ArrayList<Integer> list) {
+    public static int decreaseProblem(ArrayList<Integer> list) {
         for (int i = 0; i < list.size() - 1; i++) {
             int start = list.get(i);
             int next = list.get(i + 1);
-            if (start > next) {
+            if ((start > next) || (Math.abs(start-next) > 3) || (Math.abs(start-next) < 1)) {
                 return i+1;
             }
 
@@ -94,11 +90,11 @@ public static int boundProblem(ArrayList<Integer> list) {
     }
 
 
-    public static int decreaseProblem(ArrayList<Integer> list) {
+    public static int increaseProblem(ArrayList<Integer> list) {
         for (int i = 0; i < list.size() - 1; i++) {
             int start = list.get(i);
             int next = list.get(i + 1);
-            if (start < next) {
+            if ((start < next) || (Math.abs(start-next) > 3) || (Math.abs(start-next) < 1)) {
                 return i+1;
             }
 
