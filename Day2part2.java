@@ -26,6 +26,25 @@ public class Day2 {
             if(check(miniNumList)) {
                 total++;
             }
+            else{
+                int boundIndex=boundProblem(miniNumList);
+                int increaseIndex=increaseProblem(miniNumList);
+                int decreaseIndex=decreaseProblem(miniNumList);
+                if(!(increaseIndex==0)) {
+                    miniNumList.remove(increaseIndex);
+                }
+                else if(!(decreaseIndex == 0)) {
+                    miniNumList.remove(decreaseIndex);
+                }
+                else if(!(boundIndex==0)) {
+                    miniNumList.remove(boundIndex);
+                }
+                for(int k = 0; k<miniNumList.size()-1; k++) {
+                    if(check(miniNumList)) {
+                        total++;
+                    }
+                }
+            }
         }
 
         System.out.println(total);
@@ -48,38 +67,67 @@ public class Day2 {
 
 
 
+public static int boundProblem(ArrayList<Integer> list) {
+    for (int i = 0; i < list.size() - 1; i++) {
+        int current = list.get(i);
+        int next = list.get(i + 1);
+        int diff = Math.abs(current - next);
+        if (diff > 3 || diff < 1) {
+            return i+1;
+        }
 
-    // write a method that checks if a list is ONLY increasing
-    public static boolean checkIncreasing(ArrayList<Integer> list) {
+    }
+    return 0;
+}
 
-        int num1 = list.get(0);
-        int num2 = list.get(1);
-        int count = 0;
+    public static int increaseProblem(ArrayList<Integer> list) {
+        for (int i = 0; i < list.size() - 1; i++) {
+            int start = list.get(i);
+            int next = list.get(i + 1);
+            if (start > next) {
+                return i+1;
+            }
 
+        }
+        return 0;
+
+    }
+
+
+    public static int decreaseProblem(ArrayList<Integer> list) {
         for (int i = 0; i < list.size() - 1; i++) {
             int start = list.get(i);
             int next = list.get(i + 1);
             if (start < next) {
-               count++;
+                return i+1;
             }
-            if(count>1) {
-                return false;
+
+        }
+        return 0;
+
+    }
+
+
+
+
+    // write a method that checks if a list is ONLY increasing
+    public static boolean checkIncreasing(ArrayList<Integer> list) {
+        for (int i = 0; i < list.size() - 1; i++) {
+            int start = list.get(i);
+            int next = list.get(i + 1);
+            if (start > next) {
+             return false;
             }
+
         }
         return true;
     }
 
     public static boolean checkDecreasing(ArrayList<Integer> list) {
-        int num1 = list.get(0);
-        int num2 = list.get(1);
-        int count = 0;
         for (int i = 0; i < list.size() - 1; i++) {
             int start = list.get(i);
             int next = list.get(i + 1);
             if (start > next) {
-                count++;
-            }
-            if(count>1){
                 return false;
             }
         }
